@@ -24,16 +24,16 @@ By integrating the CDT into this end-to-end architecture, DINO achieves state-of
    1. Create conda environment
    ```sh
    conda create -n DINO python=3.7
-   conda activate internimage
+   conda activate DINO
    ```
 
    2. Clone this repo
    ```sh
-   git clone https://github.com/IDEA-Research/DINO.git
-   cd DINO
+   git clone https://github.com/PascualWalaris/DINO_labeling_ground-based_objects.git
+   cd DINO_labeling_ground-based_objects
    ```
 
-   3. Install Pytorch and torchvision (It is crucial that you install pytorch with the same version of CUDA as you have downloaded)
+   3. Install Pytorch and torchvision (it is crucial that you install pytorch with the same version of CUDA as you have downloaded)
    Check CUDA version:
    ```sh
    nvidia-smi
