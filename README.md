@@ -15,6 +15,91 @@ By integrating the CDT into this end-to-end architecture, DINO achieves state-of
 
 ![DINO Architecture](img/DINO_architecture.png)
 
+# Installation
+<details>
+  <summary>Installation</summary>
+  
+  We use the environment same to DAB-DETR and DN-DETR to run DINO. If you have run DN-DETR or DAB-DETR, you can skip this step. 
+  We test our models under ```python=3.7.3,pytorch=1.9.0,cuda=11.1```. Other versions might be available as well. Click the `Details` below for more details.
+   1. Create conda environment
+   ```sh
+   conda create -n DINO python=3.7
+   conda activate internimage
+   ```
+
+   2. Clone this repo
+   ```sh
+   git clone https://github.com/IDEA-Research/DINO.git
+   cd DINO
+   ```
+
+   3. Install Pytorch and torchvision (It is crucial that you install pytorch with the same version of CUDA as you have downloaded)
+   Check CUDA version:
+   ```sh
+   nvidia-smi
+   ```
+
+   Follow the instruction on https://pytorch.org/get-started/locally/. The below command is an example for a pytorch install for a system that has CUDA 11.8 installed.
+   ```sh
+   # an example:
+   conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+   ```
+
+   4. Install other needed packages
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+   5. Compiling CUDA operators
+   ```sh
+   cd models/dino/ops
+   python setup.py build install
+   # unit test (should see all checking is True)
+   python test.py
+   cd ../../..
+   ```
+</details>
+
+## Data
+
+<details>
+  <summary>Data</summary>
+
+Please download [COCO 2017](https://cocodataset.org/) dataset and organize them as following:
+```
+COCODIR/
+  ├── train2017/
+  ├── val2017/
+  └── annotations/
+  	├── instances_train2017.json
+  	└── instances_val2017.json
+```
+
+</details>
+
+
+## Run
+
+<details>
+  <summary>1. Eval our pretrianed models</summary>
+
+  <!-- ### Eval our pretrianed model -->
+  Download our DINO model checkpoint "checkpoint0011_4scale.pth" from [this link](https://drive.google.com/drive/folders/1qD5m1NmK0kjE5hh-G17XUX751WsEG-h_?usp=sharing) and perform the command below. You can expect to get the final AP about 49.0.
+  ```sh
+  bash scripts/DINO_eval.sh /path/to/your/COCODIR /path/to/your/checkpoint
+  ```
+
+</details>
+
+
+
+<details>
+  <summary>2. Inference and Visualizations</summary>
+
+For inference and visualizations, we provide a [notebook](inference_and_visualization.ipynb) as an example.
+
+</details>
+
 # References
 [1] Hao Zhang, Feng Li, Shilong Liu, Lei Zhang, Hang Su, Jun Zhu, Lionel M. Ni, and Heung-Yeung Shum. “DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection”. In: (Mar. 2022). URL: https://arxiv.org/abs/2203.03605v4.
 
