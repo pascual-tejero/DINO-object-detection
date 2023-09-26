@@ -12,3 +12,6 @@ In the context of DINO, CDT is applied during the pre-training phase. The model 
 * End-to-End Object Detection: DINO’s end-to-end object detection approach offers a seamless and unified framework for both localization and classification tasks. The model processes an entire image as a sequence of patches, leveraging the self-attention mechanism within the Transformer architecture to capture global and local context simultaneously. The dynamic anchor boxes, learned during training, are used to predict object locations.
 
 By integrating the CDT into this end-to-end architecture, DINO achieves state-of-the-art results in object detection tasks. Its ability to adapt anchor boxes and robustly handle noisy inputs allows it to excel in scenarios where conventional object detectors might struggle.
+
+![DINO Architecture](img/DINO_architecture.png)
+
