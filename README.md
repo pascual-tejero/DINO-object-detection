@@ -1,6 +1,18 @@
 # Introduction
 In this project, our primary objective is to conduct a comprehensive research study to determine the most suitable state-of-the-art pre-trained COCO model for the precise labeling of ground-based objects within an aerial object dataset. This research is crucial to enhance the accuracy and efficiency of our object detection process in an aerial and ground-based context.
 
+# Candidate models
+
+Our primary resource this task was the ”paperwithcode” platform, specifically the object detection section [1], which offers an extensive array of potential neural networks. While numerous options were available, we prioritized those with the highest performance scores on the Common Objects in Context (COCO) dataset [2] and whose model weights were readily accessible in their respective GitHub repositories. The models that were selected for this analysis were:
+
+* Deformable DETR: Deformable Detection Transformer (DETR) is an extension of the original DETR model that was introduced to address some limitations of traditional object detection methods. DETR, which stands for ”DEtection TRansformer,” leverages the power of transformers, originally designed for natural language processing tasks, for the task of object detection in images [3, 4].
+  
+* InternImage: InternImage was presented as a large-scale foundation model based on Convolutional Neural Network (CNN). Compared to the recent progress of large-scale Vision Transformer (ViT)s, large-scale models based on CNNs are still in an early state. The authors of this paper have developed InternImage to bridge this gap [5, 6].
+  
+* EVA: EVA is a research project that systematically explores the potential and scalability of masked visual representation learning for enhancing object detection accuracy. The primary aim is to assess the effectiveness of large-scale masked visual representation learning methods, particularly in scenarios featuring partially or fully occluded objects [7, 8].
+  
+* DINO: The DETR with Improved DeNoising Anchor Boxes (DINO) is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [9, 10].
+
 # DINO model
 The DETR (DEtection TRansformer) with Improved DeNoising Anchor Boxes (DINO) is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [1, 2]. The key features of this model are:
 
@@ -96,13 +108,29 @@ COCODIR/
 <details>
   <summary>2. Inference and Visualizations</summary>
 
-For inference and visualizations, we provide a [notebook](inference_and_visualization.ipynb) as an example.
+For inference and visualizations, we provide the folder [results](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results), here there is a brief summary:
+
+* [Object-detection analysis for pre-trained neural networks](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results/Object-detection_networks_analysis_COCOval2017): Detailed document of the ma
 
 </details>
 
 # References
-[1] Hao Zhang, Feng Li, Shilong Liu, Lei Zhang, Hang Su, Jun Zhu, Lionel M. Ni, and Heung-Yeung Shum. “DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection”. In: (Mar. 2022). URL: https://arxiv.org/abs/2203.03605v4.
+[1] Object Detection — Papers With Code - Object Detection. URL: https://paperswithcode.com/task/object-detection.
 
+[2] COCO - Common Objects in Context. URL: https://cocodataset.org/#overview.
 
+[3] Xizhou Zhu, Weijie Su, Lewei Lu, Bin Li, Xiaogang Wang, and Jifeng Dai. “Deformable DETR: Deformable Transformers for End-to-End Object Detection”. In: ICLR 2021 - 9th International Conference on Learning Representations (Oct. 2020). URL: https: //arxiv.org/abs/2010.04159v4
 
-[2] Hao Zhang, Feng Li, Shilong Liu, Lei Zhang, Hang Su, Jun Zhu, Lionel M. Ni, and Heung-Yeung Shum. GitHub - IDEA-Research/DINO: [ICLR 2023] Official implementation of the paper ”DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection”. URL: https://github.com/IDEA-Research/DINO.
+[4] Xizhou Zhu, Weijie Su, Lewei Lu, Bin Li, Xiaogang Wang, and Jifeng Dai. GitHub - Deformable DETR: Deformable Transformers for End-to-End Object Detection. URL: https: //github.com/fundamentalvision/Deformable-DETR.
+
+[5] Wenhai Wang, Jifeng Dai, Zhe Chen, Zhenhang Huang, Zhiqi Li, Xizhou Zhu, Xiaowei Hu, Tong Lu, Lewei Lu, Hongsheng Li, Xiaogang Wang, and Yu Qiao. “InternImage: Exploring Large-Scale Vision Foundation Models with Deformable Convolutions”. In: (Nov. 2022). URL: https://arxiv.org/abs/2211.05778v4.
+
+[6] Wenhai Wang, Jifeng Dai, Zhe Chen, Zhenhang Huang, Zhiqi Li, Xizhou Zhu, Xiaowei Hu, Tong Lu, Lewei Lu, Hongsheng Li, Xiaogang Wang, and Yu Qiao. GitHub - OpenGVLab/InternImage: [CVPR 2023 Highlight] InternImage: Exploring Large-Scale Vision Foundation Models with Deformable Convolutions. URL: https://github.com/OpenGVLab/InternImage.
+
+[7] Yuxin Fang, Wen Wang, Binhui Xie, Quan Sun, Ledell Wu, Xinggang Wang, Tiejun Huang, Xinlong Wang, and Yue Cao. “EVA: Exploring the Limits of Masked Visual Representation Learning at Scale”. In: (Nov. 2022). URL: https://arxiv.org/abs/2211.07636v2.
+
+[8] Yuxin Fang, Wen Wang, Binhui Xie, Quan Sun, Ledell Wu, Xinggang Wang, Tiejun Huang, Xinlong Wang, and Yue Cao. GitHub - EVA. URL: https://github.com/baaivision/EVA.
+
+[9] Hao Zhang, Feng Li, Shilong Liu, Lei Zhang, Hang Su, Jun Zhu, Lionel M. Ni, and Heung-Yeung Shum. “DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection”. In: (Mar. 2022). URL: https://arxiv.org/abs/2203.03605v4.
+
+[10] Hao Zhang, Feng Li, Shilong Liu, Lei Zhang, Hang Su, Jun Zhu, Lionel M. Ni, and Heung-Yeung Shum. GitHub - IDEA-Research/DINO: [ICLR 2023] Official implementation of the paper ”DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection”. URL: https://github.com/IDEA-Research/DINO.
