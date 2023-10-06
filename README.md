@@ -1,31 +1,20 @@
 # Introduction
-<details>
-  <summary>Introduction</summary>
-
 In this project, our primary objective is to conduct a comprehensive research study to determine the most suitable state-of-the-art pre-trained COCO model for the precise labeling of ground-based objects within an aerial object dataset. This research is crucial to enhance the accuracy and efficiency of our object detection process in an aerial and ground-based context.
-</details>
 
 # Candidate models
-<details>
-  <summary>Candidate models</summary>
+Our primary resource this task was the ”paperwithcode” platform, specifically the object detection section [1], which offers an extensive array of potential neural networks. While numerous options were available, we prioritized those with the highest performance scores on the Common Objects in Context (COCO) dataset [2] and whose model weights were readily accessible in their respective GitHub repositories. The models that were selected for this analysis were:
 
-  Our primary resource this task was the ”paperwithcode” platform, specifically the object detection section [1], which offers an extensive array of potential neural networks. While numerous options were available, we prioritized those with the highest performance scores on the Common Objects in Context (COCO) dataset [2] and whose model weights were readily accessible in their respective GitHub repositories. The models that were selected for this analysis were:
+* Deformable DETR: Deformable Detection Transformer (DETR) is an extension of the original DETR model that was introduced to address some limitations of traditional object detection methods. DETR, which stands for ”DEtection TRansformer,” leverages the power of transformers, originally designed for natural language processing tasks, for the task of object detection in images [3, 4].
   
-  * Deformable DETR: Deformable Detection Transformer (DETR) is an extension of the original DETR model that was introduced to address some limitations of traditional object detection methods. DETR, which stands for ”DEtection TRansformer,” leverages the power of transformers, originally designed for natural language processing tasks, for the task of object detection in images [3, 4].
-    
-  * InternImage: InternImage was presented as a large-scale foundation model based on Convolutional Neural Network (CNN). Compared to the recent progress of large-scale Vision Transformer (ViT)s, large-scale models based on CNNs are still in an early state. The authors of this paper have developed InternImage to bridge this gap [5, 6].
-    
-  * EVA: EVA is a research project that systematically explores the potential and scalability of masked visual representation learning for enhancing object detection accuracy. The primary aim is to assess the effectiveness of large-scale masked visual representation learning methods, particularly in scenarios featuring partially or fully occluded objects [7, 8].
-    
-  * DINO: The DETR with Improved DeNoising Anchor Boxes (DINO) is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [9, 10].
-</details>
+* InternImage: InternImage was presented as a large-scale foundation model based on Convolutional Neural Network (CNN). Compared to the recent progress of large-scale Vision Transformer (ViT)s, large-scale models based on CNNs are still in an early state. The authors of this paper have developed InternImage to bridge this gap [5, 6].
+  
+* EVA: EVA is a research project that systematically explores the potential and scalability of masked visual representation learning for enhancing object detection accuracy. The primary aim is to assess the effectiveness of large-scale masked visual representation learning methods, particularly in scenarios featuring partially or fully occluded objects [7, 8].
+  
+* DINO: The DETR with Improved DeNoising Anchor Boxes (DINO) is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [9, 10].
 
 # Results
 
 # DINO model
-<details>
-  <summary>DINO model</summary>
-
 The DETR (DEtection TRansformer) with Improved DeNoising Anchor Boxes (DINO) is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [9, 10]. The key features of this model are:
 
 * Model architecture: The heart of the DINO approach lies in its adaptation of the DETR architecture, which has already shown remarkable promise in the field of object detection. DETR replaces the traditional anchor boxes and non-maximum suppression mechanisms found in CNN with a Transformer-based architecture. However, DINO takes DETR a step further by improving the way anchor boxes are used. In DINO, the model employs a novel mechanism for generating anchor boxes that are adapted to the specific characteristics of the dataset. Unlike conventional anchor boxes that are predefined and fixed, DINO’s anchor boxes are dynamically adjusted based on the features learned by the model. This adaptability allows the model to better align the anchor boxes with the objects in the image, leading to improved localization accuracy.
@@ -38,7 +27,6 @@ In the context of DINO, CDT is applied during the pre-training phase. The model 
 By integrating the CDT into this end-to-end architecture, DINO achieves state-of-the-art results in object detection tasks. Its ability to adapt anchor boxes and robustly handle noisy inputs allows it to excel in scenarios where conventional object detectors might struggle.
 
 ![DINO Architecture](img/DINO_architecture.png)
-</details>
 
 # Installation
 <details>
