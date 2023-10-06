@@ -82,7 +82,7 @@ By integrating the CDT into this end-to-end architecture, DINO achieves state-of
 
 <details>
   <summary>Data</summary>
-If you want to get results for COCO dataset, please lease download [COCO 2017](https://cocodataset.org/) dataset and organize them as following:
+If you want to get results for COCO dataset, please lease download [COCO 2017](https://cocodataset.org/#home) dataset and organize them as following:
   
 ```
 COCODIR/
