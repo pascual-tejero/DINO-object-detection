@@ -79,8 +79,7 @@ By integrating the CDT into this end-to-end architecture, DINO achieves state-of
 
 <details>
   <summary>Data</summary>
-
-Please download [COCO 2017](https://cocodataset.org/) dataset and organize them as following:
+If you want to get results for COCO dataset, please lease download [COCO 2017](https://cocodataset.org/) dataset and organize them as following:
 ```
 COCODIR/
   ├── train2017/
@@ -90,6 +89,8 @@ COCODIR/
   	└── instances_val2017.json
 ```
 
+If you want to use your custom dataset, then you have to modify the function build() in [coco.py](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/blob/main/datasets/coco.py), and add the parameters _img_dataset_ and _ann_json_file_ which correspond to the image dataset and annotation .json file respectively.
+  
 </details>
 
 
