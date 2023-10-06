@@ -1,6 +1,8 @@
 # Introduction
 In this project, our primary objective is to conduct a comprehensive research study to determine the most suitable state-of-the-art pre-trained COCO model for the precise labeling of ground-based objects within an aerial object dataset. This research is crucial to enhance the accuracy and efficiency of our object detection process in an aerial and ground-based context.
 
+The code originated from the official DINO model repository. However, we made modifications to the model during inference to align it with our primary objective. Additionally, we introduced a "results" folder containing multiple Python scripts specifically designed for retrieving and visualizing predictions in comparison to the ground-truth data. These functionalities are detailed in the "Results" section.
+
 # Candidate models
 Our primary resource this task was the ”paperwithcode” platform, specifically the object detection section [1], which offers an extensive array of potential neural networks. While numerous options were available, we prioritized those with the highest performance scores on the Common Objects in Context (COCO) dataset [2] and whose model weights were readily accessible in their respective GitHub repositories. The models that were selected for this analysis were:
 
