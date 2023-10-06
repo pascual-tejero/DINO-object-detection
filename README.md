@@ -101,9 +101,9 @@ If you want to use your custom dataset, then you have to modify the function bui
 # Run
 
 <details>
-  <summary>1. Eval our pretrianed models</summary>
+  <summary>1. Evaluation of pre-trained models</summary>
 
-  <!-- ### Evaluation of pre-trained model -->
+  <!-- ### Evaluation of pre-trained models -->
   Download the corresponding checkpoint of DINO model from the official [DINO GitHub repository](https://github.com/IDEA-Research/DINO). In this project, we used the checkpoints with the highest epochs for each DINO model.
   ```sh
   bash scripts/DINO_eval.sh /path/to/your/COCODIR /path/to/your/checkpoint
