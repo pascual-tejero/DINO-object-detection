@@ -487,10 +487,12 @@ def analyse_json_file(json_file_dataset, format='COCO'):
         - Images with the same ID in the annotation set
         - Annotations with the same ID in the annotation set
         - Image ID and annotation ID not the same in the image set and annotation set respectively
+        - Category ID not in the official dictionary of categories (COCO or Walaris)
+        - Category ID not in the annotation set
 
     Args:
         - json_file_dataset (str): Path to the JSON file in COCO format.
-        - format (str, optional): Format of the JSON file. Defaults to 'COCO'.
+        - format (str, optional): Format of the categories in JSON file. Defaults to 'COCO'.
 
     Returns:
         - None
@@ -502,6 +504,7 @@ def analyse_json_file(json_file_dataset, format='COCO'):
 
     # Extract the 'images' and 'annotations' from the data
     images = data["images"]
+    categories = data["categories"]
     annotations = data["annotations"]
 
     # Count the number of image IDs and extract the unique image IDs in the image set
@@ -510,15 +513,20 @@ def analyse_json_file(json_file_dataset, format='COCO'):
 
     # Initialize the dictionary with the number of annotations per category
     if format == 'COCO':
-        categories_count = {category['id']: {'number': 0} for category in COCO_CATEGORY_LABEL}
+        categories_count = {category['id']: 0 for category in COCO_CATEGORY_LABEL}
     elif format == 'WALARIS':
-        categories_count = {category['id']: {'number': 0} for category in WALARIS_CATEGORY_LABEL}
+        categories_count = {category['id']: 0 for category in WALARIS_CATEGORY_LABEL}
+
+    categories_not_included = [] # List of categories not included in the official dictionary of categories
+    categories_not_included_flag = False # Flag to indicate if there are categories not included in the 
+                                         # annotation set with respect to the official dictionary of categories
 
     # Count the number of annotations per image and extract the unique image IDs in the 
     # annotation set
     annotations_per_image = {}
     unique_image_ids_annset = set()
     unique_annotations_ids_annset = set()
+
 
     for ann in annotations:
         ann_image_id = ann['image_id'] # Get the image ID
@@ -532,58 +540,47 @@ def analyse_json_file(json_file_dataset, format='COCO'):
             annotations_per_image[ann_image_id] = 1 # Initialize the number of annotations per image
 
         if category_id in categories_count:
-            categories_count[category_id]['number'] += 1 # Increment the number of annotations per category
+            # If the category ID is in the dictionary of categories, then increment the number of
+            # annotations per category
+            categories_count[category_id] += 1 
+        else:     
+            # Test a potential error in the .json file dataset, if the category ID in the annotation
+            # set is not in the official dictionary of categories
+            categories_not_included.append(category_id)
+            categories_not_included_flag = True
 
     # Separate labeled and unlabeled images
     labeled_images = unique_image_ids_annset
     unlabeled_images = [img for img in images if img['id'] not in labeled_images]
 
-    # Test if there are images with the same ID in the image set, annotations with the same ID in the
-    # annotation set and images with the same ID in the image set and annotation set
-    not_unique_imgID_annset = False
-    not_unique_annID_annset = False
-    not_unique_imgID_imgset = False
-    not_equal_imgID_imgset_and_annID_annset = False
+    # Count the number of annotations with an image ID that is not in the image set
+    not_included_image_ids = [ann['image_id'] for ann in annotations if ann['image_id'] 
+                              not in unique_image_ids_imgset]
 
-    if len(unique_image_ids_imgset) != len(images):
-        print("There are images with the same ID in the image set")
-        not_unique_imgID_imgset = True
-    if len(unique_image_ids_annset) != len(images):
-        print("There are images with the same ID in the annotation set")
-        not_unique_imgID_annset = True
-    if len(unique_annotations_ids_annset) != len(annotations):
-        print("There are annotations with the same ID in the annotation set")
-        not_unique_annID_annset = True
-
-    # Check if the image IDs from the image set and annotation set are the same
-    if unique_image_ids_imgset != unique_image_ids_annset:
-        print("The image IDs from the image set and annotation set are not the same")
-        not_equal_imgID_imgset_and_annID_annset = True
-
-
-    # Prepare data for Excel file saving
+    # Prepare data for Excel file saving and histogram plotting 
     workbook = xlsxwriter.Workbook(f'{json_file_dataset}.xlsx')
     ann_sheet = workbook.add_worksheet("Annotations per category")
     ann_sheet.write_row(0, 0, ['ID',f'Category {format} format', 'Number of annotations'])
 
     # Get the number of annotations per category
     if format == 'COCO':
-        for i in range(0, len(COCO_CATEGORY_LABEL),1):
-            category1 = COCO_CATEGORY_LABEL[i] # Get the category
+        dict_off_categories = COCO_CATEGORY_LABEL # Get the official dictionary of categories
+
+        for idx, cat in enumerate(dict_off_categories):
 
             # Write the category ID, name and number of annotations to the Excel file in starting from
-            # i+1 row and 0 column     
-            ann_sheet.write_row(i + 1, 0, [str(category1["id"]), category1['name'], 
-                                        categories_count[category1['id']]['number']])
+            # idx+1 row and 0 column     
+            ann_sheet.write_row(idx + 1, 0, [str(cat["id"]), cat['name'], categories_count[cat['id']]])
+
     elif format == 'WALARIS':
-        for i in range(0, len(WALARIS_CATEGORY_LABEL),1):
-            category1 = WALARIS_CATEGORY_LABEL[i] # Get the category
+        dict_off_categories =  WALARIS_CATEGORY_LABEL # Get the official dictionary of categories
+
+        for idx, cat in enumerate(dict_off_categories):
 
             # Write the category ID, name and number of annotations to the Excel file in starting from
-            # i+1 row and 0 column
-            ann_sheet.write_row(i + 1, 0, [str(category1["id"]), category1['name'],
-                                        categories_count[category1['id']]['number']])
-
+            # idx+1 row and 0 column
+            ann_sheet.write_row(idx + 1, 0, [str(cat["id"]), cat['name'], categories_count[cat['id']]])
+            
     # Calculate the mean, standard deviation, median, maximum and minimum number of annotations per image
     mean_ann_p_image = np.mean(list(annotations_per_image.values()))
     std_ann_p_image = np.std(list(annotations_per_image.values()))
@@ -601,25 +598,71 @@ def analyse_json_file(json_file_dataset, format='COCO'):
     stat_sheet.write_row(5, 0, ['Unique annotations IDs (annotation set)', len(unique_annotations_ids_annset)])
     stat_sheet.write_row(6, 0, ['Number of images with annotations', len(labeled_images)])
     stat_sheet.write_row(7, 0, ['Number of images without annotations', len(unlabeled_images)])
-    stat_sheet.write_row(8, 0, ['Mean of annotations per image', mean_ann_p_image])
-    stat_sheet.write_row(9, 0, ['Standard deviation of annotations per image', std_ann_p_image])
-    stat_sheet.write_row(10, 0, ['Median of annotations per image', median_ann_p_image])
-    stat_sheet.write_row(11, 0, ['Maximum number of annotations in an image', maximum_ann_image])
-    stat_sheet.write_row(12, 0, ['Minimum number of annotations in an image', minimum_ann_image])
+    stat_sheet.write_row(8, 0, ['Number of annotations without image ID in the image set', len(not_included_image_ids)])
+    stat_sheet.write_row(9, 0, ['Mean of annotations per image', mean_ann_p_image])
+    stat_sheet.write_row(10, 0, ['Standard deviation of annotations per image', std_ann_p_image])
+    stat_sheet.write_row(11, 0, ['Median of annotations per image', median_ann_p_image])
+    stat_sheet.write_row(12, 0, ['Maximum number of annotations in an image', maximum_ann_image])
+    stat_sheet.write_row(13, 0, ['Minimum number of annotations in an image', minimum_ann_image])
 
     # Add a new worksheet for errors
-    if (not_unique_imgID_imgset or not_unique_imgID_annset or 
-        not_unique_annID_annset or not_equal_imgID_imgset_and_annID_annset):
+    stat_sheet = workbook.add_worksheet('Errors') # Add a new worksheet for errors
 
-        stat_sheet = workbook.add_worksheet('Errors')
-        if not_unique_imgID_imgset:
-            stat_sheet.write_row(0, 0, ['There are images with the same ID in the image set', 'True'])
-        if not_unique_imgID_annset:
-            stat_sheet.write_row(1, 0, ['There are annotations with the same ID in the annotation set', 'True'])
-        if not_unique_annID_annset:
-            stat_sheet.write_row(2, 0, ['There are annotations with the same ID in the annotation set', 'True'])
-        if not_equal_imgID_imgset_and_annID_annset:
-            stat_sheet.write_row(3, 0, ['The image IDs from the image set and annotation set are not the same', 'True'])
+    # If the number of unique image IDs in the image set is not equal to the number of images,
+    # then it means that there are images with the same ID (id) in the image set
+    if len(unique_image_ids_imgset) != len(images):
+        err_msg = ("There are images with the same image ID (id) in the image set: "
+                   f"Number of unique image IDs (id) in image set = {len(unique_image_ids_imgset)} != "
+                   f"Number of images = {len(images)}")
+        print(err_msg)
+        stat_sheet.write_row(1, 0, [err_msg])
+        
+    # If the number of unique image IDs in the annotation set is not equal to the number of images,
+    # then it means that there are images with the same ID (image_id) in the annotation set
+    if len(unique_image_ids_annset) != len(images):
+        err_msg = ("There are images with the same image ID (image_id) in the annotation set: "
+                   f"Number of unique image IDs (image_id) in annotation set = {len(unique_image_ids_annset)} "
+                   f"!= Number of images = {len(images)}")
+        print(err_msg)
+        stat_sheet.write_row(2, 0, [err_msg])
+        
+    # If the number of unique annotation IDs in the annotation set is not equal to the number of
+    # annotations, then it means that there are annotations with the same ID (id) in the annotation set
+    if len(unique_annotations_ids_annset) != len(annotations):
+        err_msg = ("There are annotations with the same annotation ID (id) in the annotation set: "
+                   f"Number of unique annotation IDs (id) in annotation set = {len(unique_annotations_ids_annset)} "
+                   f"!= Number of annotations = {len(annotations)}")
+        print(err_msg)
+        stat_sheet.write_row(3, 0, [err_msg])
+
+    # If the set of unique image IDs (id) in the image set is not equal to the set of unique image IDs
+    # in the annotation set (image_id), then it means that there are images and annotations whose IDs do not 
+    # match in the image set and annotation set respectively
+    if unique_image_ids_imgset != unique_image_ids_annset:
+        err_msg = ("The unique image IDs from the image set (id) and unique annotation IDS (image_id) from "
+                   "the annotation set are not the same")
+        print(err_msg)
+        stat_sheet.write_row(4, 0, [err_msg])
+        
+    # If the number of categories in the category set is not equal to the number of categories that
+    # appear in the official dictionary of categories, then it means that there are categories in the
+    # annotation set that do not appear in the official dictionary of categories
+    if len(categories) != len(dict_off_categories):
+        err_msg = (f"The number of categories ({len(categories)}) in the category set does not "
+                   "match the number of categories that appear in the official dictionary of categories "
+                   f"({len(dict_off_categories)}) of {format} format")
+        print(err_msg)
+        stat_sheet.write_row(5, 0, [err_msg])
+    
+    # If there are categories in the annotation set that are not included in the official dictionary of
+    # categories, then it means that there are categories in the annotation set that do not appear in the
+    # official dictionary of categories
+    if categories_not_included_flag:
+        err_msg = ("There are categories in the annotation set (category_id) that are not included in the "
+                   f"official dictionary of categories of {format} format: "
+                   f"{sorted(set(categories_not_included))} ")
+        print(err_msg)                                      
+        stat_sheet.write_row(6, 0, [err_msg])
 
     # Close the workbook
     workbook.close()
@@ -633,6 +676,7 @@ def analyse_json_file(json_file_dataset, format='COCO'):
     print("Unique annotations IDs (annotation set): {}".format(len(unique_annotations_ids_annset)))
     print("Number of images with annotations: {}".format(len(labeled_images)))
     print("Number of images without annotations: {}".format(len(unlabeled_images)))
+    print("Number of annotations without image ID in the image set: {}".format(len(not_included_image_ids)))
     print("Mean of annotations per image: {}".format(mean_ann_p_image))
     print("Standard deviation of annotations per image: {}".format(std_ann_p_image))
     print("Median of annotations per image: {}".format(median_ann_p_image))
@@ -785,16 +829,15 @@ if __name__=='__main__':
     walaris_img_dataset = '/mnt/NAS_Backup/Datasets/Tarsier_Main_Dataset/Images/'
 
     # Number of images to select from the dataset
-    sample_size_number = 50000  
+    sample_size_number = 150000 
 
     # Random sample .json file from the Walaris .json file converted to COCO format
-    # original_dataset = '../data/NoPlaymentLabels/annotations_added_and_json_cleaned/day_noplayment_11092023_train_ADDED_ground-based_objects(threshold=0.3)_CLEANED.json'
-    original_dataset = '../data/NoPlaymentLabels/annotations_added_and_json_cleaned_imgID_normalized/day_noplayment_11092023_train_ADDED_ground-based_objects(threshold=0.3)_CLEANED_imgIDnormalized.json'
-    # random_sampling_dataset = f'./../data/test.json'
+    original_dataset = '/home/tarsier/Documents/Walaris/Tasks/Task3_Training/data_preprocessing/data/merged_train.json'
+    # original_dataset = '../data/NoPlaymentLabels_DINO_4scale_SwinL_add_annotations/day_noplayment_11092023_train.json'
+    # random_sampling_dataset = f'../data/NoPlaymentLabels_DINO_4scale_SwinL_add_annotations/day_noplayment_11092023_train_{sample_size_number}images.json'
 
-
-    # format_json = 'COCO'
-    format_json = 'WALARIS'
+    # format_cat_json = 'COCO'
+    format_cat_json = 'WALARIS'
 
 
     # ----------------------------- CONVERT FROM WALARIS FORMAT TO COCO FORMAT -------------------------------
@@ -836,19 +879,19 @@ if __name__=='__main__':
 
     # Analyse the random sample from json file
     analyse_json_file(json_file_dataset=original_dataset,
-                        format=format_json)
+                        format=format_cat_json)
     # analyse_json_file(json_file_dataset=random_sampling_dataset,
-    #                   format=format_json)
+    #                   format=format_cat_json)
 
     # ------------------------------------------- VISUALIZE IMAGES -------------------------------------------
 
     # Visualize a random image from the .json file in COCO format
     # visualize_image_and_annotations_bbox(images_dataset=walaris_img_dataset, 
     #                                      annotations_dataset_json=original_dataset,
-    #                                      format=format_json)
+    #                                      format=format_cat_json)
     # visualize_image_and_annotations_bbox(images_dataset=walaris_img_dataset, 
     #                                      annotations_dataset_json=random_sampling_dataset,
-    #                                      format=format_json)
+    #                                      format=format_cat_json)
     
 
     

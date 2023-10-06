@@ -541,6 +541,7 @@ def make_coco_transforms(image_set, fix_size=False, strong_aug=False, args=None)
             print("Under debug mode for flops calculation only!!!!!!!!!!!!!!!!")
             return T.Compose([
                 # T.ResizeDebug((1280, 800)), # Uncomment if you want to resize the image
+
                 normalize,
             ])   
 

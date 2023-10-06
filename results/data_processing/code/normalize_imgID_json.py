@@ -2,7 +2,7 @@ import json
 from collections import defaultdict
 
 
-def clean_dataset_json_imgID(input_json, 
+def normalize_imgID_json(input_json, 
                              output_json):
     
     """
@@ -61,4 +61,4 @@ if __name__ == '__main__':
     output_json = '../data/NoPlaymentLabels/annotations_added_and_json_cleaned_imgID_normalized/day_noplayment_11092023_train_ADDED_ground-based_objects(threshold=0.3)_CLEANED_imgIDnormalized.json'
     
 
-    clean_dataset_json_imgID(input_json, output_json)
+    normalize_imgID_json(input_json, output_json)
