@@ -128,23 +128,25 @@ For inference and visualizations, we provide the folder [results](https://github
 # References
 <details>
   <summary>References</summary>
-[1] Object Detection — Papers With Code - Object Detection. URL: https://paperswithcode.com/task/object-detection.
+    
+  [1] Object Detection — Papers With Code - Object Detection. URL: https://paperswithcode.com/task/object-detection.
+  
+  [2] COCO - Common Objects in Context. URL: https://cocodataset.org/#overview.
+  
+  [3] Xizhou Zhu, Weijie Su, Lewei Lu, Bin Li, Xiaogang Wang, and Jifeng Dai. “Deformable DETR: Deformable Transformers for End-to-End Object Detection”. In: ICLR 2021 - 9th International Conference on Learning Representations (Oct. 2020). URL: https: //arxiv.org/abs/2010.04159v4
+  
+  [4] Xizhou Zhu, Weijie Su, Lewei Lu, Bin Li, Xiaogang Wang, and Jifeng Dai. GitHub - Deformable DETR: Deformable Transformers for End-to-End Object Detection. URL: https: //github.com/fundamentalvision/Deformable-DETR.
+  
+  [5] Wenhai Wang, Jifeng Dai, Zhe Chen, Zhenhang Huang, Zhiqi Li, Xizhou Zhu, Xiaowei Hu, Tong Lu, Lewei Lu, Hongsheng Li, Xiaogang Wang, and Yu Qiao. “InternImage: Exploring Large-Scale Vision Foundation Models with Deformable Convolutions”. In: (Nov. 2022). URL: https://arxiv.org/abs/2211.05778v4.
+  
+  [6] Wenhai Wang, Jifeng Dai, Zhe Chen, Zhenhang Huang, Zhiqi Li, Xizhou Zhu, Xiaowei Hu, Tong Lu, Lewei Lu, Hongsheng Li, Xiaogang Wang, and Yu Qiao. GitHub - OpenGVLab/InternImage: [CVPR 2023 Highlight] InternImage: Exploring Large-Scale Vision Foundation Models with Deformable Convolutions. URL: https://github.com/OpenGVLab/InternImage.
+  
+  [7] Yuxin Fang, Wen Wang, Binhui Xie, Quan Sun, Ledell Wu, Xinggang Wang, Tiejun Huang, Xinlong Wang, and Yue Cao. “EVA: Exploring the Limits of Masked Visual Representation Learning at Scale”. In: (Nov. 2022). URL: https://arxiv.org/abs/2211.07636v2.
+  
+  [8] Yuxin Fang, Wen Wang, Binhui Xie, Quan Sun, Ledell Wu, Xinggang Wang, Tiejun Huang, Xinlong Wang, and Yue Cao. GitHub - EVA. URL: https://github.com/baaivision/EVA.
+  
+  [9] Hao Zhang, Feng Li, Shilong Liu, Lei Zhang, Hang Su, Jun Zhu, Lionel M. Ni, and Heung-Yeung Shum. “DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection”. In: (Mar. 2022). URL: https://arxiv.org/abs/2203.03605v4.
+  
+  [10] Hao Zhang, Feng Li, Shilong Liu, Lei Zhang, Hang Su, Jun Zhu, Lionel M. Ni, and Heung-Yeung Shum. GitHub - IDEA-Research/DINO: [ICLR 2023] Official implementation of the paper ”DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection”. URL: https://github.com/IDEA-Research/DINO.
 
-[2] COCO - Common Objects in Context. URL: https://cocodataset.org/#overview.
-
-[3] Xizhou Zhu, Weijie Su, Lewei Lu, Bin Li, Xiaogang Wang, and Jifeng Dai. “Deformable DETR: Deformable Transformers for End-to-End Object Detection”. In: ICLR 2021 - 9th International Conference on Learning Representations (Oct. 2020). URL: https: //arxiv.org/abs/2010.04159v4
-
-[4] Xizhou Zhu, Weijie Su, Lewei Lu, Bin Li, Xiaogang Wang, and Jifeng Dai. GitHub - Deformable DETR: Deformable Transformers for End-to-End Object Detection. URL: https: //github.com/fundamentalvision/Deformable-DETR.
-
-[5] Wenhai Wang, Jifeng Dai, Zhe Chen, Zhenhang Huang, Zhiqi Li, Xizhou Zhu, Xiaowei Hu, Tong Lu, Lewei Lu, Hongsheng Li, Xiaogang Wang, and Yu Qiao. “InternImage: Exploring Large-Scale Vision Foundation Models with Deformable Convolutions”. In: (Nov. 2022). URL: https://arxiv.org/abs/2211.05778v4.
-
-[6] Wenhai Wang, Jifeng Dai, Zhe Chen, Zhenhang Huang, Zhiqi Li, Xizhou Zhu, Xiaowei Hu, Tong Lu, Lewei Lu, Hongsheng Li, Xiaogang Wang, and Yu Qiao. GitHub - OpenGVLab/InternImage: [CVPR 2023 Highlight] InternImage: Exploring Large-Scale Vision Foundation Models with Deformable Convolutions. URL: https://github.com/OpenGVLab/InternImage.
-
-[7] Yuxin Fang, Wen Wang, Binhui Xie, Quan Sun, Ledell Wu, Xinggang Wang, Tiejun Huang, Xinlong Wang, and Yue Cao. “EVA: Exploring the Limits of Masked Visual Representation Learning at Scale”. In: (Nov. 2022). URL: https://arxiv.org/abs/2211.07636v2.
-
-[8] Yuxin Fang, Wen Wang, Binhui Xie, Quan Sun, Ledell Wu, Xinggang Wang, Tiejun Huang, Xinlong Wang, and Yue Cao. GitHub - EVA. URL: https://github.com/baaivision/EVA.
-
-[9] Hao Zhang, Feng Li, Shilong Liu, Lei Zhang, Hang Su, Jun Zhu, Lionel M. Ni, and Heung-Yeung Shum. “DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection”. In: (Mar. 2022). URL: https://arxiv.org/abs/2203.03605v4.
-
-[10] Hao Zhang, Feng Li, Shilong Liu, Lei Zhang, Hang Su, Jun Zhu, Lionel M. Ni, and Heung-Yeung Shum. GitHub - IDEA-Research/DINO: [ICLR 2023] Official implementation of the paper ”DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection”. URL: https://github.com/IDEA-Research/DINO.
 </details>
