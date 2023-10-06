@@ -1,7 +1,7 @@
 # Introduction
 In this project, our primary objective is to conduct a comprehensive research study to determine the most suitable state-of-the-art pre-trained COCO model for the precise labeling of ground-based objects within an aerial object dataset. This research is crucial to enhance the accuracy and efficiency of our object detection process in an aerial and ground-based context.
 
-The code originated from the official DINO model repository. However, we made modifications to the model during inference to align it with our primary objective. Additionally, we introduced a "results" folder containing multiple Python scripts specifically designed for retrieving and visualizing predictions in comparison to the ground-truth data. These functionalities are detailed in the "Results" section.
+The code originated from the official [DINO GitHub repository](https://github.com/IDEA-Research/DINO). However, we made modifications to the model during inference to align it with our primary objective. Additionally, we introduced a "results" folder containing multiple Python scripts specifically designed for retrieving and visualizing predictions in comparison to the ground-truth data. These functionalities are detailed in the "Results" section.
 
 # Candidate models
 Our primary resource this task was the ”paperwithcode” platform, specifically the object detection section [1], which offers an extensive array of potential neural networks. While numerous options were available, we prioritized those with the highest performance scores on the Common Objects in Context (COCO) dataset [2] and whose model weights were readily accessible in their respective GitHub repositories. The models that were selected for this analysis were:
@@ -15,9 +15,12 @@ Our primary resource this task was the ”paperwithcode” platform, specificall
 * DINO: The DETR with Improved DeNoising Anchor Boxes (DINO) is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [9, 10].
 
 # Results
+After selecting the pre-trained models (in COCO 2017 training set). We evaluated them against the COCO 2017 validation set. These evaluations provided us with important metrics, including the global performance indicators such as Average Precision (AP) and Average Recall (AR). Additionally, for certain models, we were able to delve deeper into the analysis by examining per-category results, which allowed us to assess the model's performance on individual object categories.
+
+For a more comprehensive understanding of each model's performance and a detailed breakdown of the results, we recommend referring to the accompanying document [here](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results/Object-detection_networks_analysis_COCOval2017). This document provides in-depth insights into the evaluation outcomes and will help you make informed decisions based on the specific requirements of your project or task.
 
 # DINO model
-The DETR (DEtection TRansformer) with Improved DeNoising Anchor Boxes (DINO) is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [9, 10]. The key features of this model are:
+The DETR (DEtection TRansformer) with Improved DeNoising Anchor Boxes (DINO) was the selected model. It is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [9, 10]. The key features of this model are:
 
 * Model architecture: The heart of the DINO approach lies in its adaptation of the DETR architecture, which has already shown remarkable promise in the field of object detection. DETR replaces the traditional anchor boxes and non-maximum suppression mechanisms found in CNN with a Transformer-based architecture. However, DINO takes DETR a step further by improving the way anchor boxes are used. In DINO, the model employs a novel mechanism for generating anchor boxes that are adapted to the specific characteristics of the dataset. Unlike conventional anchor boxes that are predefined and fixed, DINO’s anchor boxes are dynamically adjusted based on the features learned by the model. This adaptability allows the model to better align the anchor boxes with the objects in the image, leading to improved localization accuracy.
 
@@ -100,8 +103,8 @@ If you want to use your custom dataset, then you have to modify the function bui
 <details>
   <summary>1. Eval our pretrianed models</summary>
 
-  <!-- ### Eval our pretrianed model -->
-  Download our DINO model checkpoint "checkpoint0011_4scale.pth" from [this link](https://drive.google.com/drive/folders/1qD5m1NmK0kjE5hh-G17XUX751WsEG-h_?usp=sharing) and perform the command below. You can expect to get the final AP about 49.0.
+  <!-- ### Evaluation of pre-trained model -->
+  Download the corresponding checkpoint of DINO model from the official [DINO GitHub repository](https://github.com/IDEA-Research/DINO). In this project, we used the checkpoints with the highest epochs for each DINO model.
   ```sh
   bash scripts/DINO_eval.sh /path/to/your/COCODIR /path/to/your/checkpoint
   ```
@@ -113,7 +116,7 @@ If you want to use your custom dataset, then you have to modify the function bui
 <details>
   <summary>2. Inference and Visualizations</summary>
 
-For inference and visualizations, we provide the folder [results](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results), here there is a brief summary:
+For inference and visualization, we provide the folder [results](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results), here there is a brief summary:
 
 * [Object-detection analysis for pre-trained neural networks](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results/Object-detection_networks_analysis_COCOval2017): Detailed document of the ma
 
