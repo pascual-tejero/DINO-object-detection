@@ -20,6 +20,8 @@ In this project, our primary objective is to conduct a comprehensive research st
   * DINO: The DETR with Improved DeNoising Anchor Boxes (DINO) is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [9, 10].
 </details>
 
+# Results
+
 # DINO model
 <details>
   <summary>DINO model</summary>
@@ -83,7 +85,7 @@ By integrating the CDT into this end-to-end architecture, DINO achieves state-of
    ```
 </details>
 
-## Data
+# Data
 
 <details>
   <summary>Data</summary>
@@ -101,7 +103,7 @@ COCODIR/
 </details>
 
 
-## Run
+# Run
 
 <details>
   <summary>1. Eval our pretrianed models</summary>
