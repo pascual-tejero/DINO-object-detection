@@ -17,7 +17,7 @@ Our primary resource this task was the ”paperwithcode” platform, specificall
 # Results
 After selecting the pre-trained models (in COCO 2017 training set). We evaluated them against the COCO 2017 validation set. These evaluations provided us with important metrics, including the global performance indicators such as Average Precision (AP) and Average Recall (AR). Additionally, for certain models, we were able to delve deeper into the analysis by examining per-category results, which allowed us to assess the model's performance on individual object categories.
 
-For a more comprehensive understanding of each model's performance and a detailed breakdown of the results, we recommend referring to the accompanying document [here](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results/Object-detection_networks_analysis_COCOval2017). This document provides in-depth insights into the evaluation outcomes and will help you make informed decisions based on the specific requirements of your project or task.
+For a more comprehensive understanding of each model's performance and a detailed breakdown of the results, we recommend referring to the accompanying document [here](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results/Object-detection_networks_analysis_COCOval2017). Note that the best results for ground-based objects were obtained with the model DINO-4scale with SwinL as backbone.
 
 # DINO model
 The DETR (DEtection TRansformer) with Improved DeNoising Anchor Boxes (DINO) was the selected model. It is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [9, 10]. The key features of this model are:
@@ -114,12 +114,18 @@ If you want to use your custom dataset, then you have to modify the function bui
 
 
 <details>
-  <summary>2. Inference and Visualizations</summary>
+  <summary>2. Inference and Visualization</summary>
 
 For inference and visualization, we provide the folder [results](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results), here there is a brief summary:
 
-* [Object-detection analysis for pre-trained neural networks](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results/Object-detection_networks_analysis_COCOval2017): Detailed document of the ma
+* [Object-detection analysis for pre-trained neural networks](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results/Object-detection_networks_analysis_COCOval2017): This comprehensive document provides a detailed breakdown of the results achieved by each pre-trained model when applied to the COCO 2017 training set and evaluated against the COCO 2017 validation set. Within this document, you can explore the Average Precision (AP) and Average Recall (AR) scores for various model iterations, allowing for a thorough comparison of their performance. Furthermore, for select models, you'll find per-category results based on the COCO dataset, offering insights into the models' specific strengths and weaknesses across different object categories.
 
+* [Data processing](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results/data_processing/code): Multiple Python scripts for multiple functionalities, for example: get a random sample from a bigger dataset of a .json file, make a statistical analysis of a .json file (number of images, number of annotations, per-category annotations analysis...), normalize the image ID of a .json file if its number is too high, clean the dataset from unwanted bounding boxes of a dataset, count the number of images with a certain resolution... Read the function description of each script for a more detailed information.
+
+* [Inference and visualization](https://github.com/PascualWalaris/DINO_labeling_ground-based_objects/tree/main/results/inference_and_visualization): Within this folder, there are two primary scripts, each offering distinct functionalities. Please refer to the individual script descriptions for a more comprehensive understanding. The model used in each case is DINO-4scale-SwinL pre-trained in COCO 2017 training set:
+  * _inference_and_add_categories_json_file.py_: This script empowers users to enhance a .json file in COCO format by adding annotations for specific user-selected categories. During this process, you have the option to visualize predictions as new annotations are incorporated into the file.
+  * _inference_and_visualization.py_: This script serves a critical role in visualizing and saving results for negative images. It employs Intersection Over Union (IoU) to compare ground truth annotations with predictions. Users have the flexibility to set a threshold for displaying and saving negative examples based on their preferences.
+ 
 </details>
 
 # References
