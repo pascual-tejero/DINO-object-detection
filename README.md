@@ -36,9 +36,7 @@ By integrating the CDT into this end-to-end architecture, DINO achieves state-of
 # Installation
 <details>
   <summary>Installation</summary>
-  
-  We use the environment same to DAB-DETR and DN-DETR to run DINO. If you have run DN-DETR or DAB-DETR, you can skip this step. 
-  We test our models under ```python=3.7.3,pytorch=1.9.0,cuda=11.1```. Other versions might be available as well. Click the `Details` below for more details.
+
    1. Create conda environment
    ```sh
    conda create -n DINO python=3.7
