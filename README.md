@@ -17,7 +17,7 @@ Our primary resource this task was the ”paperwithcode” platform, specificall
 # Results
 After selecting the pre-trained models (in COCO 2017 training set). We evaluated them against the COCO 2017 validation set. These evaluations provided us with important metrics, including the global performance indicators such as Average Precision (AP) and Average Recall (AR). Additionally, for certain models, we were able to delve deeper into the analysis by examining per-category results, which allowed us to assess the model's performance on individual object categories.
 
-For a more comprehensive understanding of each model's performance and a detailed breakdown of the results, we recommend referring to the accompanying document [here](https://github.com/pascutc98/DINO_labeling_ground-based_objects/tree/main/results/Object-detection_networks_analysis_COCOval2017). Note that the best results for ground-based objects were obtained with the model DINO-4scale with SwinL as backbone.
+For a more comprehensive understanding of each model's performance and a detailed breakdown of the results, we recommend referring to the accompanying document [here](https://github.com/pascutc98/DINO_labeling_ground-based_objects/tree/main/results/results_analysis). Note that the best results for ground-based objects were obtained with the model DINO-4scale with SwinL as backbone.
 
 # DINO model
 The DETR (DEtection TRansformer) with Improved DeNoising Anchor Boxes (DINO) was the selected model. It is an innovative research project that enhances end-to-end object detection by introducing a novel approach to model architecture and Contrastive DeNoising Training (CDT) [9, 10]. The key features of this model are:
