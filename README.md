@@ -49,7 +49,7 @@ By integrating the CDT into this end-to-end architecture, DINO achieves state-of
    conda activate DINO
    ```
 
-   3. Install Pytorch and torchvision (it is crucial that you install pytorch with the same version of CUDA as you have downloaded)
+   3. Install Pytorch and torchvision (it is crucial that you install pytorch with the same version of CUDA as you have downloaded).
    Check CUDA version:
    ```sh
    nvidia-smi
