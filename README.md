@@ -34,52 +34,46 @@ By integrating the CDT into this end-to-end architecture, DINO achieves state-of
 ![DINO Architecture](img/DINO_architecture.png)
 
 # Installation
-<details>
-  <summary>Installation</summary>
+1. Clone this repo
+```sh
+git clone https://github.com/pascutc98/DINO-object-detection
+cd DINO-object-detection
+```
 
-   1. Clone this repo
-   ```sh
-   git clone https://github.com/pascutc98/DINO-object-detection
-   cd DINO-object-detection
-   ```
+2. Create conda environment
+```sh
+conda create -n DINO python=3.7
+conda activate DINO
+```
 
-   2. Create conda environment
-   ```sh
-   conda create -n DINO python=3.7
-   conda activate DINO
-   ```
+3. Install Pytorch and torchvision (it is crucial that you install pytorch with the same version of CUDA as you have downloaded).
+Check CUDA version:
+```sh
+nvidia-smi
+```
 
-   3. Install Pytorch and torchvision (it is crucial that you install pytorch with the same version of CUDA as you have downloaded).
-   Check CUDA version:
-   ```sh
-   nvidia-smi
-   ```
+Follow the instruction on https://pytorch.org/get-started/locally/. The below command is an example for a pytorch install for a system that has CUDA 11.8 installed.
+```sh
+# an example:
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+```
 
-   Follow the instruction on https://pytorch.org/get-started/locally/. The below command is an example for a pytorch install for a system that has CUDA 11.8 installed.
-   ```sh
-   # an example:
-   conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
-   ```
+4. Install other needed packages
+```sh
+pip install -r requirements.txt
+```
 
-   4. Install other needed packages
-   ```sh
-   pip install -r requirements.txt
-   ```
-
-   5. Compiling CUDA operators
-   ```sh
-   cd models/dino/ops
-   python setup.py build install
-   # unit test (should see all checking is True)
-   python test.py
-   cd ../../..
-   ```
-</details>
+5. Compiling CUDA operators
+```sh
+cd models/dino/ops
+python setup.py build install
+# unit test (should see all checking is True)
+python test.py
+cd ../../..
+```
 
 # Data
 
-<details>
-  <summary>Data</summary>
 If you want to get results for COCO dataset, please lease download [COCO 2017](https://cocodataset.org/#home) dataset and organize them as following:
   
 ```
@@ -93,13 +87,9 @@ COCODIR/
 
 If you want to use your custom dataset, then you have to modify the function build() in [coco.py](https://github.com/pascutc98/DINO_labeling_ground-based_objects/blob/main/datasets/coco.py), and add the parameters _img_dataset_ and _ann_json_file_ which correspond to the image dataset and annotation .json file respectively.
   
-</details>
-
-
 # Run
 
-<details>
-  <summary>1. Evaluation of pre-trained models</summary>
+1. Evaluation of pre-trained models
 
   <!-- ### Evaluation of pre-trained models -->
   Download the corresponding checkpoint of DINO model from the official [DINO GitHub repository](https://github.com/IDEA-Research/DINO). In this project, we used the checkpoints with the highest epochs for each DINO model.
@@ -107,12 +97,10 @@ If you want to use your custom dataset, then you have to modify the function bui
   bash scripts/DINO_eval.sh /path/to/your/COCODIR /path/to/your/checkpoint
   ```
 
-</details>
 
 
 
-<details>
-  <summary>2. Inference and Visualization</summary>
+2. Inference and Visualization
 
 For inference and visualization, we provide the folder [results](https://github.com/pascutc98/DINO_labeling_ground-based_objects/tree/main/results), here there is a brief summary:
 
@@ -124,11 +112,7 @@ For inference and visualization, we provide the folder [results](https://github.
   * _inference_and_add_categories_json_file.py_: This script empowers users to enhance a .json file in COCO format by adding annotations for specific user-selected categories. During this process, you have the option to visualize predictions as new annotations are incorporated into the file.
   * _inference_and_visualization.py_: This script serves a critical role in visualizing and saving results for negative images. It employs Intersection Over Union (IoU) to compare ground truth annotations with predictions. Users have the flexibility to set a threshold for displaying and saving negative examples based on their preferences.
  
-</details>
-
 # References
-<details>
-  <summary>References</summary>
     
   [1] Object Detection — Papers With Code - Object Detection. URL: https://paperswithcode.com/task/object-detection.
   
