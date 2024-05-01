@@ -12,7 +12,7 @@ def clean_dataset_json(input_json,
 
     """
     Takes a .json file and cleans it. The criteria for cleaning is based on if there is
-    a bounding box "uav" (class_id = 1 in Walaris format) that overlaps with another 
+    a bounding box "uav" (class_id = 1 in WWS format) that overlaps with another 
     bounding box (class_id != 1) but the overlap is not considered if the class_id is
     in the list of categories to not remove (not_remove_categories_ID). The overlap is
     calculated using the IoU (Intersection over Union) formula. The output is a .json file
@@ -119,7 +119,7 @@ def clean_dataset_json(input_json,
                 image_name = img["file_name"] # Image name
                 image_path = dataset_images_path + image_name # Image path
                 visualise_img(image_path, ann_value_list, dir_save, image_name,
-                            format_json="WALARIS",
+                            format_json="WWS",
                             idx=f"{idx_img}_ID:{img_id}_"
                             f"Overlap_considered:{overlap_threshold}_"
                             f"MaxIoU:{highest_IoU}_before_cleaning") # Visualize the image
@@ -131,7 +131,7 @@ def clean_dataset_json(input_json,
 
             if visualize:
                 visualise_img(image_path, ann_value_list, dir_save, image_name,
-                            format_json="WALARIS",
+                            format_json="WWS",
                             idx=f"{idx_img}_ID:{img_id}_"
                             f"Overlap_considered:{overlap_threshold}_"
                             f"MaxIoU:{highest_IoU}_after_cleaning") # Visualize the image
@@ -213,7 +213,7 @@ def calculate_overlap_value(bbox1, bbox2):
 
 if __name__ == "__main__":
 
-    WALARIS_CATEGORY_LABEL = [
+    WWS_CATEGORY_LABEL = [
         {"id": 1, "name": "uav"},
         {"id": 2, "name": "airplane"},
         {"id": 3, "name": "bicycle"},

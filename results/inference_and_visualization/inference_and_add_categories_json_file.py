@@ -104,8 +104,8 @@ COCO_CLASS_LABELS_NAME2NUM = {label["name"]: label["id"] for label in COCO_CATEG
 # Map from COCO category name to COCO category ID
 COCO_CLASS_LABELS_NUM2NAME = {label["id"]: label["name"] for label in COCO_CATEGORY_LABEL}
 
-# Map from COCO to Walaris
-MAP_COCO_TO_WALARIS = {
+# Map from COCO to WWS
+MAP_COCO_TO_WWS = {
     1: 13,  # person (1) -> person (13)
     2: 3,   # bicycle (2) -> bicycle (3)
     3: 7,   # car (3) -> car (7)
@@ -203,8 +203,8 @@ def inference_and_add_categories_json(dir_save=None,
     The model used is DINO_4scale_swin pre-trained in COCO dataset. The predictions are made in
     COCO format. 
 
-    The .json file with the name input_json_file in Walaris format. Therefore, a conversion 
-    of the predictions from COCO to Walaris format is applied. The annotations are added to the .json 
+    The .json file with the name input_json_file in WWS format. Therefore, a conversion 
+    of the predictions from COCO to WWS format is applied. The annotations are added to the .json 
     file with the name output_json_file. The annotations are added in the last position of the .json 
     file.
 
@@ -375,7 +375,7 @@ def inference_and_add_categories_json(dir_save=None,
                     'ignore': 0,
                     'image_id': pred_dict['image_id'],
                     'bbox': bbox_pred.tolist(),
-                    'category_id': MAP_COCO_TO_WALARIS[COCO_CLASS_LABELS_NAME2NUM[cat_pred]],
+                    'category_id': MAP_COCO_TO_WWS[COCO_CLASS_LABELS_NAME2NUM[cat_pred]],
                     'id': last_value 
                 })
                 

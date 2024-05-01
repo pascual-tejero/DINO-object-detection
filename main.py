@@ -306,13 +306,13 @@ def main(args):
         return
     
     if args.test:
-        annotation_json_COCO_format = "/home/tarsier/Documents/Walaris/Tasks/Task2_Ground_based_Object_Detection/Code/data_processing/annotations_Walaris_dataset/data/Walaris_dataset_coco_format_random_sampling_100samples.json"
+        annotation_json_COCO_format = "/home/tarsier/Documents/WWS/Tasks/Task2_Ground_based_Object_Detection/Code/data_processing/annotations_WWS_dataset/data/WWS_dataset_coco_format_random_sampling_100samples.json"
         test(model, criterion, postprocessors, data_loader_val, base_ds, device, 
                 args.output_dir, wo_class_error=wo_class_error, args=args, logger=None, annotation_json_COCO_format=annotation_json_COCO_format)
         
         # cat_ids = [i for i in range(0, 81)]
         # cat_ids = [42]
-        coco_obj = COCO("/home/tarsier/Documents/Walaris/Tasks/Task2_Ground_based_Object_Detection/Code/data_processing/annotations_Walaris_dataset/data/Walaris_dataset_coco_format_random_sampling_100samples.json")
+        coco_obj = COCO("/home/tarsier/Documents/WWS/Tasks/Task2_Ground_based_Object_Detection/Code/data_processing/annotations_WWS_dataset/data/WWS_dataset_coco_format_random_sampling_100samples.json")
         # dets = coco_obj.loadRes(args.output_dir + f'/results0.json')
         dets = coco_obj.loadRes(args.output_dir + f'/results{args.rank}.json')
         print(dets)

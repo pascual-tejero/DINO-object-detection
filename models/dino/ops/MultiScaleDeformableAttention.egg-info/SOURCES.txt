@@ -1,7 +1,7 @@
 setup.py
-/home/tarsier/Documents/Walaris/Tasks/Task 2 - Ground-based Object Detection/Code/DINO/models/dino/ops/src/vision.cpp
-/home/tarsier/Documents/Walaris/Tasks/Task 2 - Ground-based Object Detection/Code/DINO/models/dino/ops/src/cpu/ms_deform_attn_cpu.cpp
-/home/tarsier/Documents/Walaris/Tasks/Task 2 - Ground-based Object Detection/Code/DINO/models/dino/ops/src/cuda/ms_deform_attn_cuda.cu
+/home/tarsier/Documents/WWS/Tasks/Task 2 - Ground-based Object Detection/Code/DINO/models/dino/ops/src/vision.cpp
+/home/tarsier/Documents/WWS/Tasks/Task 2 - Ground-based Object Detection/Code/DINO/models/dino/ops/src/cpu/ms_deform_attn_cpu.cpp
+/home/tarsier/Documents/WWS/Tasks/Task 2 - Ground-based Object Detection/Code/DINO/models/dino/ops/src/cuda/ms_deform_attn_cuda.cu
 MultiScaleDeformableAttention.egg-info/PKG-INFO
 MultiScaleDeformableAttention.egg-info/SOURCES.txt
 MultiScaleDeformableAttention.egg-info/dependency_links.txt

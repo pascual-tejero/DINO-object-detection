@@ -2,9 +2,9 @@ import json
 import os
 from PIL import Image
 
-data_root_annotations = '/home/tarsier/Documents/Walaris/Tasks/Task2_Ground_based_Object_Detection/Code/data_processing/annotations_Walaris_dataset/data/' # Walaris dataset annotations .json file
-json_file_path = data_root_annotations + 'Walaris_dataset(1000samples_included_remaining_categories)_coco_format_random_subsampling_from10000_samples_dataset.json'
-# json_file_path = data_root_annotations + 'Walaris_dataset_coco_format_random_sampling_10000samples.json'
+data_root_annotations = '/home/tarsier/Documents/WWS/Tasks/Task2_Ground_based_Object_Detection/Code/data_processing/annotations_WWS_dataset/data/' # WWS dataset annotations .json file
+json_file_path = data_root_annotations + 'WWS_dataset(1000samples_included_remaining_categories)_coco_format_random_subsampling_from10000_samples_dataset.json'
+# json_file_path = data_root_annotations + 'WWS_dataset_coco_format_random_sampling_10000samples.json'
 image_folder_path = '/mnt/NAS_Backup/Datasets/Tarsier_Main_Dataset/Images/'
 
 with open(json_file_path, 'r') as f:

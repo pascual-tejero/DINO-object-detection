@@ -8,7 +8,7 @@ import matplotlib.patches as patches
 from PIL import Image
 import time
 
-WALARIS_CATEGORY_LABEL = [
+WWS_CATEGORY_LABEL = [
     {"id": 1, "name": "uav"},
     {"id": 2, "name": "airplane"},
     {"id": 3, "name": "bicycle"},
@@ -117,13 +117,13 @@ COCO_CLASS_LABELS_NUM2NAME = {label["id"]: label["name"] for label in COCO_CATEG
 
 COCO_CLASS_LABELS_NAME2NUM = {label["name"]: label["id"] for label in COCO_CATEGORY_LABEL}
 
-WALALARIS_CLASS_LABELS_NAME2NUM = {label["name"]: label["id"] for label in WALARIS_CATEGORY_LABEL}
+WALALARIS_CLASS_LABELS_NAME2NUM = {label["name"]: label["id"] for label in WWS_CATEGORY_LABEL}
 
-WALALARIS_CLASS_LABELS_NUM2NAME = {label["id"]: label["name"] for label in WALARIS_CATEGORY_LABEL}
+WALALARIS_CLASS_LABELS_NUM2NAME = {label["id"]: label["name"] for label in WWS_CATEGORY_LABEL}
 
-### and *** are not contaminated categories (different categories in Walaris are combined in the 
+### and *** are not contaminated categories (different categories in WWS are combined in the 
 # same category in COCO)
-MAP_WALARIS_TO_COCO_IDS = {
+MAP_WWS_TO_COCO_IDS = {
     1: 5,   # uav (1) -> airplance (5) ***
     2: 5,   # airplane (2) -> airplane (5) ***
     3: 2,   # bicycle (3) -> bicycle (2)
@@ -144,7 +144,7 @@ MAP_WALARIS_TO_COCO_IDS = {
     18: 5   # helicopter (18) -> airplane (5) ***
 } 
 
-MAP_COCO_TO_WALARIS_IDS = {
+MAP_COCO_TO_WWS_IDS = {
     1: 13,  # person (1) -> person (13)
     2: 3,   # bicycle (2) -> bicycle (3)
     3: 7,   # car (3) -> car (7)
@@ -227,10 +227,10 @@ MAP_COCO_TO_WALARIS_IDS = {
     90: 0   # toothbrush (90) -> None
 }
 
-def convert_walaris_format_to_COCOformat(annotations_dataset, 
+def convert_WWS_format_to_COCOformat(annotations_dataset, 
                                         annotations_dataset_COCO_format):
     """
-    Convert the .json file from Walaris format to COCO format. The annotations set is the only
+    Convert the .json file from WWS format to COCO format. The annotations set is the only
     portion of the dataset that is converted. The rest of the dataset remains the same.
         
     Args:
@@ -253,7 +253,7 @@ def convert_walaris_format_to_COCOformat(annotations_dataset,
         "description": "My COCO Dataset",
         "version": "1.0",
         "year": 2023,
-        "contributor": "Walaris",
+        "contributor": "WWS",
         "date_created": "2023-06-20"
     }
 
@@ -311,7 +311,7 @@ def convert_walaris_format_to_COCOformat(annotations_dataset,
             "iscrowd": dict_ann["iscrowd"],
             "image_id": dict_ann["image_id"],
             "bbox": dict_ann["bbox"],
-            "category_id": MAP_WALARIS_TO_COCO_IDS[dict_ann["category_id"]],
+            "category_id": MAP_WWS_TO_COCO_IDS[dict_ann["category_id"]],
             "id": dict_ann["id"]
         }
         dataset_COCO_format["annotations"].append(temp)
@@ -329,18 +329,18 @@ def get_random_sample_from_json_file(original_json_file,
                                      not_include_annotations_from_category=None,
                                      include_remaining_categories=False):
     """
-    Get a random sample from a JSON file in COCO or Walaris format or any other dataset format.
+    Get a random sample from a JSON file in COCO or WWS format or any other dataset format.
 
     Note that if you do not want to either not include certain categories (not_include_categories), 
     not include certain annotations from certain categories (not_include_annotations_from_category) 
     or include some remaining categories in case the number of annotations is low 
     (include_remaining_categories), you need to be consistent with the category IDs and the format of 
-    the JSON file (COCO, Walaris or any other format).
+    the JSON file (COCO, WWS or any other format).
     
     For example, if you do not want to include the category "person" you need to take into account that in COCO
-    format the category ID for "person" is 1, while in Walaris format the category ID for "person" is 13. 
+    format the category ID for "person" is 1, while in WWS format the category ID for "person" is 13. 
     Therefore, if you want to exclude the category "person" you need to specify the category ID=[1] if the JSON
-    file is in COCO format or the category ID=[13] if the JSON file is in Walaris format. The parameter 
+    file is in COCO format or the category ID=[13] if the JSON file is in WWS format. The parameter 
     type of not_include_categories, not_include_annotations_from_category and include_remaining_categories 
     must be a list with the IDs of the categories to exclude or include.
     
@@ -468,7 +468,7 @@ def get_random_sample_from_json_file(original_json_file,
 
 def analyse_json_file(json_file_dataset, format='COCO'):
     """
-    Analyse a JSON file in COCO or Walaris format or any other dataset format. The function prints the
+    Analyse a JSON file in COCO or WWS format or any other dataset format. The function prints the
     statistics of the dataset.
 
     The statistics include:
@@ -487,7 +487,7 @@ def analyse_json_file(json_file_dataset, format='COCO'):
         - Images with the same ID in the annotation set
         - Annotations with the same ID in the annotation set
         - Image ID and annotation ID not the same in the image set and annotation set respectively
-        - Category ID not in the official dictionary of categories (COCO or Walaris)
+        - Category ID not in the official dictionary of categories (COCO or WWS)
         - Category ID not in the annotation set
 
     Args:
@@ -514,8 +514,8 @@ def analyse_json_file(json_file_dataset, format='COCO'):
     # Initialize the dictionary with the number of annotations per category
     if format == 'COCO':
         categories_count = {category['id']: 0 for category in COCO_CATEGORY_LABEL}
-    elif format == 'WALARIS':
-        categories_count = {category['id']: 0 for category in WALARIS_CATEGORY_LABEL}
+    elif format == 'WWS':
+        categories_count = {category['id']: 0 for category in WWS_CATEGORY_LABEL}
 
     categories_not_included = [] # List of categories not included in the official dictionary of categories
     categories_not_included_flag = False # Flag to indicate if there are categories not included in the 
@@ -572,8 +572,8 @@ def analyse_json_file(json_file_dataset, format='COCO'):
             # idx+1 row and 0 column     
             ann_sheet.write_row(idx + 1, 0, [str(cat["id"]), cat['name'], categories_count[cat['id']]])
 
-    elif format == 'WALARIS':
-        dict_off_categories =  WALARIS_CATEGORY_LABEL # Get the official dictionary of categories
+    elif format == 'WWS':
+        dict_off_categories =  WWS_CATEGORY_LABEL # Get the official dictionary of categories
 
         for idx, cat in enumerate(dict_off_categories):
 
@@ -734,7 +734,7 @@ def visualize_image_and_annotations_bbox(images_dataset,
         valid_categories = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 18, 19, 21]
         dict_categories = COCO_CLASS_LABELS_NUM2NAME
 
-    elif format == 'WALARIS':
+    elif format == 'WWS':
         valid_categories = [0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18]
         dict_categories = WALALARIS_CLASS_LABELS_NUM2NAME
 
@@ -747,8 +747,8 @@ def visualize_image_and_annotations_bbox(images_dataset,
                     "/ 17. Cat / 18. Dog / 19. Horse / 21. Cow")
             print("Type 0 if you want to visualize random categories")
 
-        elif format == 'WALARIS':
-            print("\nType a valid category (WALARIS format) are:")
+        elif format == 'WWS':
+            print("\nType a valid category (WWS format) are:")
             print("1. UAV / 2. Airplane / 3. Bicycle / 4. Bird / 5. Boat / 6. Bus / 7. Car / 8. Cat / " 
                   "9. Cow / 10. Dog / 11. Horse / 12. Motorcycle / 13. Person / 14. Traffic Light / "
                   "15. Train / 16. Truck / 17. UFO / 18. Helicopter")
@@ -825,34 +825,34 @@ def visualize_image_and_annotations_bbox(images_dataset,
 if __name__=='__main__':
     # -------------------------------------- PARAMETERS ------------------------------------------------------
     
-    # Walaris images dataset
-    walaris_img_dataset = '/mnt/NAS_Backup/Datasets/Tarsier_Main_Dataset/Images/'
+    # WWS images dataset
+    WWS_img_dataset = '/mnt/NAS_Backup/Datasets/Tarsier_Main_Dataset/Images/'
 
     # Number of images to select from the dataset
     sample_size_number = 150000 
 
-    # Random sample .json file from the Walaris .json file converted to COCO format
-    original_dataset = '/home/tarsier/Documents/Walaris/Tasks/Task3_Training/data_preprocessing/data/merged_train.json'
+    # Random sample .json file from the WWS .json file converted to COCO format
+    original_dataset = '/home/tarsier/Documents/WWS/Tasks/Task3_Training/data_preprocessing/data/merged_train.json'
     # original_dataset = '../data/NoPlaymentLabels_DINO_4scale_SwinL_add_annotations/day_noplayment_11092023_train.json'
     # random_sampling_dataset = f'../data/NoPlaymentLabels_DINO_4scale_SwinL_add_annotations/day_noplayment_11092023_train_{sample_size_number}images.json'
 
     # format_cat_json = 'COCO'
-    format_cat_json = 'WALARIS'
+    format_cat_json = 'WWS'
 
 
-    # ----------------------------- CONVERT FROM WALARIS FORMAT TO COCO FORMAT -------------------------------
+    # ----------------------------- CONVERT FROM WWS FORMAT TO COCO FORMAT -------------------------------
     
-    # Walaris .json file converted to COCO format
-    # dataset_walaris_json = './../data/NoPlaymentLabels/day_noplayment_11092023_train.json'    
+    # WWS .json file converted to COCO format
+    # dataset_WWS_json = './../data/NoPlaymentLabels/day_noplayment_11092023_train.json'    
     # dataset_COCO_json = './../data/NoPlaymentLabels/day_noplayment_11092023_train_coco_format.json'
 
-    # Conversion from Walaris dataset to COCO format dataset
-    # convert_walaris_format_to_COCOformat(dataset_walaris_json,
+    # Conversion from WWS dataset to COCO format dataset
+    # convert_WWS_format_to_COCOformat(dataset_WWS_json,
     #                                      dataset_COCO_json)
 
     # -------------------------------------- RANDOM SAMPLE FROM DATASET --------------------------------------
 
-    # Get a random sample from a json file in either COCO or Walaris format
+    # Get a random sample from a json file in either COCO or WWS format
     # get_random_sample_from_json_file(original_dataset,
     #                                  random_sampling_dataset,
     #                                  sample_size=sample_size_number,
@@ -886,10 +886,10 @@ if __name__=='__main__':
     # ------------------------------------------- VISUALIZE IMAGES -------------------------------------------
 
     # Visualize a random image from the .json file in COCO format
-    # visualize_image_and_annotations_bbox(images_dataset=walaris_img_dataset, 
+    # visualize_image_and_annotations_bbox(images_dataset=WWS_img_dataset, 
     #                                      annotations_dataset_json=original_dataset,
     #                                      format=format_cat_json)
-    # visualize_image_and_annotations_bbox(images_dataset=walaris_img_dataset, 
+    # visualize_image_and_annotations_bbox(images_dataset=WWS_img_dataset, 
     #                                      annotations_dataset_json=random_sampling_dataset,
     #                                      format=format_cat_json)
     

@@ -88,7 +88,7 @@ COCO_CATEGORY_LABEL = [
         {"supercategory": "indoor","id": 90,"name": "toothbrush"}
     ]
 
-WALARIS_CATEGORY_LABEL = [
+WWS_CATEGORY_LABEL = [
     {"id": 1, "name": "uav"},
     {"id": 2, "name": "airplane"},
     {"id": 3, "name": "bicycle"},
@@ -111,7 +111,7 @@ WALARIS_CATEGORY_LABEL = [
 
 COCO_CLASS_LABELS_NUM2NAME = {label["id"]: label["name"] for label in COCO_CATEGORY_LABEL}
 
-WALALARIS_CLASS_LABELS_NUM2NAME = {label["id"]: label["name"] for label in WALARIS_CATEGORY_LABEL}
+WALALARIS_CLASS_LABELS_NUM2NAME = {label["id"]: label["name"] for label in WWS_CATEGORY_LABEL}
 
 
 
@@ -120,12 +120,12 @@ def visualize_img_json_file(json_file,
                             num_images=10,
                             format_json='COCO'):
     """
-    Visualize the images from a json file in COCO or WALARIS format
+    Visualize the images from a json file in COCO or WWS format
 
     :param json_file: path to the json file
     :param dir_save: directory to save the images
     :param num_images: number of images to visualize
-    :param format_json: format of the json file (COCO or WALARIS)
+    :param format_json: format of the json file (COCO or WWS)
 
     :return: None
     """
@@ -143,7 +143,7 @@ def visualize_img_json_file(json_file,
 
     if format_json == 'COCO':
         dict_categories = COCO_CLASS_LABELS_NUM2NAME
-    elif format_json == 'WALARIS':
+    elif format_json == 'WWS':
         dict_categories = WALALARIS_CLASS_LABELS_NUM2NAME
 
     # Get the random images from the dataset
@@ -205,7 +205,7 @@ if __name__ == "__main__":
     num_images = 1000
 
     # The format of the json file
-    format_json = 'WALARIS'
+    format_json = 'WWS'
 
     visualize_img_json_file(json_file=json_file,
                             dir_save=dir_save,
